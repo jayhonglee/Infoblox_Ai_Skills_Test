@@ -1,0 +1,16 @@
+ip,ip_valid,ip_version,subnet_cidr,hostname,hostname_valid,fqdn,fqdn_consistent,reverse_ptr,mac,mac_valid,owner,owner_email,owner_team,device_type,device_type_confidence,site,site_normalized,source_row_id,normalization_steps
+192.168.10.5,true,4,192.168.10.0/24,host01,true,,false,5.10.168.192.in-addr.arpa,AA:BB:CC:DD:EE:FF,true,priya,priya@corp.example.com,platform,server,high,BLR Campus,BLR Campus,1,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|mac_normalize|owner_parse|device_type_classify|site_normalize
+10.0.1.300,false,,,host-02,true,host-02.local,true,,11:22:33:44:55:66,true,,,ops,server,medium,HQ Bldg 1,HQ Building 1,2,ip_trim|ip_invalid_octet_out_of_range|hostname_validate|fqdn_validate|fqdn_consistency_check|mac_normalize|owner_parse|device_type_classify|site_normalize
+10.0.1,false,,,host03,true,,false,,AA:BB:CC:DD:EE:FF,true,,jane@corp.example.com,,switch,high,HQ-BUILDING-1,HQ Building 1,3,ip_trim|ip_invalid_wrong_part_count|hostname_validate|mac_normalize|owner_parse|device_type_classify|site_normalize
+10.0.1.1.2,false,,,printer-01,true,,false,,00:11:22:33:44:55,true,,,facilities,printer,high,HQ,HQ,4,ip_trim|ip_invalid_wrong_part_count|hostname_validate|mac_normalize|owner_parse|device_type_classify|site_normalize
+fe80::1%eth0,false,,,iot-cam01,true,,false,,00:AA:BB:CC:DD:EE,true,,,sec,iot,high,Lab-1,Lab 1,5,ip_trim|ip_invalid_ipv6_or_non_ipv4|hostname_validate|mac_normalize|owner_parse|device_type_classify|site_normalize
+127.0.0.1,true,4,,local-test,true,,false,1.0.0.127.in-addr.arpa,,false,,,,unknown,low,N/A,,6,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|device_type_classify
+169.254.10.20,true,4,,host-apipa,true,,false,20.10.254.169.in-addr.arpa,,false,,,,server,medium,,,7,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|device_type_classify
+10.10.10.10,true,4,10.10.10.0/24,srv-10,true,,false,10.10.10.10.in-addr.arpa,,false,,,platform,server,high,BLR campus,BLR Campus,8,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|owner_parse|device_type_classify|site_normalize
+abc.def.ghi.jkl,false,,,badhost,true,,false,,,false,,,,server,medium,,,9,ip_trim|ip_invalid_non_numeric_or_negative|hostname_validate|device_type_classify
+192.168.1.-1,false,,,neg,true,,false,,,false,,,,unknown,low,,,10,ip_trim|ip_invalid_non_numeric_or_negative|hostname_validate|device_type_classify
+192.168.1.255,true,4,192.168.1.0/24,bcast,true,,false,255.1.168.192.in-addr.arpa,,false,,,,unknown,low,,,11,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|device_type_classify
+192.168.1.0,true,4,192.168.1.0/24,netid,true,,false,0.1.168.192.in-addr.arpa,,false,,,,unknown,low,,,12,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|device_type_classify
+8.8.8.8,true,4,,dns-google,true,,false,8.8.8.8.in-addr.arpa,,false,,,,router,high,DC-1,DC 1,13,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|device_type_classify|site_normalize
+10.10.10.10,true,4,10.10.10.0/24,host-10,true,,false,10.10.10.10.in-addr.arpa,,false,,,,server,high,,,14,ip_trim|ip_parse|ip_normalize|hostname_validate|reverse_ptr_generate|device_type_classify
+N/A,false,,,missing-ip,true,,false,,,false,,,,unknown,low,,,15,ip_trim|ip_invalid_wrong_part_count|hostname_validate|device_type_classify

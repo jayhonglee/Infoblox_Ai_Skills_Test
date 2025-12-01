@@ -1,21 +1,32 @@
 #!/usr/bin/env python3
-# Simple runner to produce baseline outputs.
-# Extend this to call your own normalization/classification steps.
-
-import subprocess, sys
+"""
+Main orchestrator for inventory data processing pipeline.
+Processes inventory_raw.csv through comprehensive validation and normalization.
+"""
+import subprocess
+import sys
 from pathlib import Path
 
 HERE = Path(__file__).parent
-PROJECT_ROOT = HERE.parent.parent  # Go up from infoblox_test_env -> Solution -> root
+PROJECT_ROOT = HERE.parent
 
 def main():
-    # Step 1: IPv4 normalization (example starter)
+    """Run the comprehensive data processing pipeline."""
+    input_csv = PROJECT_ROOT / "inventory_raw.csv"
+    output_csv = PROJECT_ROOT / "inventory_clean.csv"
+    anomalies_json = PROJECT_ROOT / "anomalies.json"
+    
+    # Run comprehensive processing
+    print("Starting comprehensive data processing...")
     subprocess.check_call([
-        sys.executable, 
-        str(HERE / "run_ipv4_validation.py"), 
-        str(PROJECT_ROOT / "inventory_raw.csv")
+        sys.executable,
+        str(HERE / "data_processor.py"),
+        str(input_csv)
     ])
-    print("IPv4 normalization complete. Next: add your steps to reach full target schema.")
+    
+    print(f"✓ Processing complete!")
+    print(f"  - Output: {output_csv}")
+    print(f"  - Anomalies: {anomalies_json}")
 
 if __name__ == "__main__":
     main()
