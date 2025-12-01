@@ -1,0 +1,4 @@
+pycairo==1.28.0
+PyGObject==3.52.3
+pywatchman==2.0.0
+wheel==0.45.1
